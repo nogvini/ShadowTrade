@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css'; // Importa os estilos globais
 import { AppProvider } from '@/contexts/AppContext'; // Ajuste o caminho se necessário
 
@@ -6,9 +6,13 @@ import { AppProvider } from '@/contexts/AppContext'; // Ajuste o caminho se nece
 export const metadata: Metadata = {
   title: 'Raid S&S - Configuração de Trading',
   description: 'Interface para configuração de contas de trading Owner, Shadow e Slave.',
-  // Adicionar mais metadados conforme necessário, como viewport, theme-color, icons etc.
-  viewport: 'width=device-width, initial-scale=1',
-  icons: { icon: "/favicon.ico" }, // Certifique-se de ter um favicon.ico na pasta public
+  icons: { icon: "/favicon.ico" },
+};
+
+// Viewport export separado conforme recomendação do Next.js 14
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

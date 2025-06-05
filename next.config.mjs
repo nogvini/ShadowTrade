@@ -4,9 +4,6 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  },
-  experimental: {
-    optimizeCss: true // Mantendo esta opção se suportada na sua versão do Next.js
   }
 };
 

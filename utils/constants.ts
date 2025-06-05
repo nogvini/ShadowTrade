@@ -10,5 +10,4 @@
 
 export const SIMULATED_API_DELAY = 1500; // ms, já usado no AppContext, centralizando aqui.
 
-// Adicione outras constantes conforme o projeto evolui.
-console.log('constants.ts loaded - Defina constantes globais aqui.'); 
+// Adicione outras constantes conforme o projeto evolui. 
