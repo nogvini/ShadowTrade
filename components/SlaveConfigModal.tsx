@@ -92,9 +92,9 @@ const SlaveConfigModal: React.FC = () => {
 
   return (
     <Modal isOpen={activeModal === 'slave'} onClose={closeModal} title="Configurar Slave Account" size="lg">
-      <form onSubmit={handleSubmit} className="space-y-5 pt-2">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 pt-2">
         <div>
-          <Label htmlFor="slave-apiKey">API Key</Label>
+          <Label htmlFor="slave-apiKey" className="text-xs sm:text-sm">API Key</Label>
           <Input
             id="slave-apiKey"
             name="apiKey"
@@ -104,13 +104,14 @@ const SlaveConfigModal: React.FC = () => {
             placeholder="API Key da Conta Slave"
             error={!!localErrors.apiKey}
             disabled={isLoading}
+            size="default"
             className="mt-1"
           />
-          {localErrors.apiKey && <p className="text-error text-[10px] mt-1">{localErrors.apiKey}</p>}
+          {localErrors.apiKey && <p className="text-error text-[9px] sm:text-[10px] mt-1">{localErrors.apiKey}</p>}
         </div>
 
         <div>
-          <Label htmlFor="slave-apiSecret">API Secret</Label>
+          <Label htmlFor="slave-apiSecret" className="text-xs sm:text-sm">API Secret</Label>
           <Input
             id="slave-apiSecret"
             name="apiSecret"
@@ -120,68 +121,72 @@ const SlaveConfigModal: React.FC = () => {
             placeholder="API Secret da Conta Slave"
             error={!!localErrors.apiSecret}
             disabled={isLoading}
+            size="default"
             className="mt-1"
           />
-          {localErrors.apiSecret && <p className="text-error text-[10px] mt-1">{localErrors.apiSecret}</p>}
+          {localErrors.apiSecret && <p className="text-error text-[9px] sm:text-[10px] mt-1">{localErrors.apiSecret}</p>}
         </div>
 
         <div>
-          <Label htmlFor="slave-passphrase">Passphrase</Label>
+          <Label htmlFor="slave-passphrase" className="text-xs sm:text-sm">Passphrase (Opcional)</Label>
           <Input
             id="slave-passphrase"
             name="passphrase"
             type="password"
             value={formData.passphrase || ''}
             onChange={handleChange}
-            placeholder="Passphrase (LNMarkets)"
+            placeholder="Passphrase (se aplicável)"
             error={!!localErrors.passphrase}
             disabled={isLoading}
+            size="default"
             className="mt-1"
           />
-          {localErrors.passphrase && <p className="text-error text-[10px] mt-1">{localErrors.passphrase}</p>}
+          {localErrors.passphrase && <p className="text-error text-[9px] sm:text-[10px] mt-1">{localErrors.passphrase}</p>}
         </div>
 
         <div>
-          <Label htmlFor="slave-amount">Quantidade (USD)</Label>
+          <Label htmlFor="slave-amount" className="text-xs sm:text-sm">Quantidade (USD)</Label>
           <Input
             id="slave-amount"
             name="amount"
             type="number"
-            value={formData.amount.toString()} 
+            value={formData.amount.toString()}
             onChange={handleChange}
-            placeholder="Ex: 500"
+            placeholder="Ex: 1000"
             error={!!localErrors.amount}
             disabled={isLoading}
+            size="default"
             className="mt-1"
           />
-          {localErrors.amount && <p className="text-error text-[10px] mt-1">{localErrors.amount}</p>}
+          {localErrors.amount && <p className="text-error text-[9px] sm:text-[10px] mt-1">{localErrors.amount}</p>}
         </div>
-        
+
         {localErrors.submit && (
-          <div className="flex items-center text-error text-[10px] p-2 bg-error/10 rounded-md">
+          <div className="flex items-center text-error text-[9px] sm:text-[10px] p-2 bg-error/10 rounded-md">
             <AlertTriangle size={14} className="mr-2 flex-shrink-0" /> 
             {localErrors.submit}
           </div>
         )}
 
-        <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3">
+        <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-4 sm:pt-5">
           <Button 
             type="button" 
             variant="outline" 
             onClick={closeModal} 
             disabled={isLoading} 
             shadowText
+            size="default"
             className="w-full sm:w-auto min-w-[100px]"
           >
             Cancelar
           </Button>
           <Button 
             type="submit" 
-            isLoading={isLoading} 
             disabled={isLoading} 
             variant="success" 
             icon={Settings} 
             shadowText
+            size="default"
             className="w-full sm:w-auto min-w-[100px]"
           >
             {slaveConfig ? 'Salvar Alterações' : 'Conectar Slave Account'}

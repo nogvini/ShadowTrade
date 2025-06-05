@@ -28,6 +28,9 @@ interface AppContextType extends AppState {
   setGlobalError: (field: string, message: string) => void;
   clearGlobalError: (field: string) => void;
   clearAllGlobalErrors: () => void;
+  // Loading popup controls
+  loadingMessage: string;
+  showLoadingPopup: boolean;
   // Adicionar mais funções de dispatch conforme necessário
 }
 
@@ -42,6 +45,8 @@ const initialState: AppState = {
   isLoading: false,
   errors: {},
   activeModal: null,
+  loadingMessage: '',
+  showLoadingPopup: false,
 };
 
 // Usar a constante importada para o delay da simulação
@@ -60,7 +65,15 @@ const simulateApiCall = (success: boolean = true, delay: number = SIMULATED_API_
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, setState] = useState<AppState>(initialState);
 
-  const setLoading = (isLoading: boolean) => setState(prev => ({ ...prev, isLoading }));
+  const setLoading = (isLoading: boolean, message: string = '') => {
+    setState(prev => ({ 
+      ...prev, 
+      isLoading, 
+      showLoadingPopup: isLoading,
+      loadingMessage: isLoading ? message : ''
+    }));
+  };
+
   const setErrors = (field: string, message: string) => {
     setState(prev => ({ ...prev, errors: { ...prev.errors, [field]: message } }));
   };
@@ -74,7 +87,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const clearAllErrors = () => setState(prev => ({ ...prev, errors: {} }));
 
   const setOwnerConfig = useCallback(async (data: OwnerFormData): Promise<boolean> => {
-    setLoading(true);
+    setLoading(true, 'Conectando Owner API...');
     clearAllErrors();
     try {
       await simulateApiCall();
@@ -90,11 +103,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         isOwnerConfigured: true,
         currentStep: 2,
         isLoading: false,
+        showLoadingPopup: false,
+        loadingMessage: '',
       }));
       return true;
     } catch (error) {
       setErrors('ownerSubmit', 'Falha ao conectar API Owner. Verifique suas credenciais.');
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev => ({ 
+        ...prev, 
+        isLoading: false,
+        showLoadingPopup: false,
+        loadingMessage: '',
+      }));
       return false;
     }
   }, []);
@@ -119,7 +139,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Funções para Shadow e Slave (similares à Owner)
   const setShadowConfig = useCallback(async (data: ShadowFormData): Promise<boolean> => {
-    setLoading(true);
+    setLoading(true, 'Configurando Shadow Account...');
     clearAllErrors();
     try {
       await simulateApiCall();
@@ -129,11 +149,23 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         isConnected: true,
         maskedApiKey: maskApiKey(data.apiKey) // Usar a função utilitária
       };
-      setState(prev => ({ ...prev, shadowConfig: newConfig, isLoading: false, activeModal: null }));
+      setState(prev => ({ 
+        ...prev, 
+        shadowConfig: newConfig, 
+        isLoading: false, 
+        activeModal: null,
+        showLoadingPopup: false,
+        loadingMessage: '',
+      }));
       return true;
     } catch (error) {
       setErrors('shadowSubmit', 'Falha ao configurar Shadow Account.');
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev => ({ 
+        ...prev, 
+        isLoading: false,
+        showLoadingPopup: false,
+        loadingMessage: '',
+      }));
       return false;
     }
   }, []);
@@ -148,7 +180,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
 
   const setSlaveConfig = useCallback(async (data: SlaveFormData): Promise<boolean> => {
-    setLoading(true);
+    setLoading(true, 'Configurando Slave Account...');
     clearAllErrors();
     try {
       await simulateApiCall();
@@ -158,11 +190,23 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         isConnected: true,
         maskedApiKey: maskApiKey(data.apiKey) // Usar a função utilitária
       };
-      setState(prev => ({ ...prev, slaveConfig: newConfig, isLoading: false, activeModal: null }));
+      setState(prev => ({ 
+        ...prev, 
+        slaveConfig: newConfig, 
+        isLoading: false, 
+        activeModal: null,
+        showLoadingPopup: false,
+        loadingMessage: '',
+      }));
       return true;
     } catch (error) {
       setErrors('slaveSubmit', 'Falha ao configurar Slave Account.');
-      setState(prev => ({ ...prev, isLoading: false }));
+      setState(prev => ({ 
+        ...prev, 
+        isLoading: false,
+        showLoadingPopup: false,
+        loadingMessage: '',
+      }));
       return false;
     }
   }, []);

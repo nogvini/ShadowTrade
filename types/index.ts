@@ -36,6 +36,9 @@ export interface AppState {
   isLoading: boolean; // Estado de carregamento global para chamadas de API simuladas
   errors: Record<string, string>; // Erros de validação de formulário
   activeModal: 'shadow' | 'slave' | null; // Controla qual modal de configuração está ativo
+  // Loading popup controls
+  loadingMessage: string;
+  showLoadingPopup: boolean;
 }
 
 // Tipos para os formulários, podem ser parciais das configs principais

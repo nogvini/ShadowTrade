@@ -263,3 +263,156 @@ body {
   /* The glow effect for borders is now primarily handled via Tailwind's boxShadow utilities in tailwind.config.ts (e.g., shadow-glow-success) */
   /* Pulse and chainMove animations are defined in tailwind.config.ts keyframes and animations */
 } 
+
+/* ==== RESPONSIVE CONTAINER SYSTEM ==== */
+.container-responsive {
+  @apply w-full mx-auto;
+  @apply px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12;
+  max-width: 100vw;
+}
+
+.container-sm {
+  @apply max-w-sm sm:max-w-md md:max-w-lg;
+}
+
+.container-md {
+  @apply max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl;
+}
+
+.container-lg {
+  @apply max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl;
+}
+
+.container-xl {
+  @apply max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl;
+}
+
+.container-full {
+  @apply max-w-full;
+}
+
+/* ==== RESPONSIVE SPACING SYSTEM ==== */
+.spacing-sm {
+  @apply space-y-2 sm:space-y-3 md:space-y-4;
+}
+
+.spacing-md {
+  @apply space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6;
+}
+
+.spacing-lg {
+  @apply space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10;
+}
+
+/* ==== RESPONSIVE PADDING SYSTEM ==== */
+.padding-sm {
+  @apply p-2 sm:p-3 md:p-4;
+}
+
+.padding-md {
+  @apply p-3 sm:p-4 md:p-6 lg:p-8;
+}
+
+.padding-lg {
+  @apply p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12;
+}
+
+/* ==== RESPONSIVE CARD SYSTEM ==== */
+.card-responsive {
+  @apply w-full rounded-lg border transition-all duration-500 ease-smooth;
+  @apply bg-bg-secondary border-bg-tertiary text-text-primary;
+}
+
+.card-adaptive {
+  @apply card-responsive;
+  /* Auto-adjust padding based on screen size */
+  @apply p-3 sm:p-4 md:p-6 lg:p-8;
+  /* Auto-adjust maximum width based on content */
+  min-width: 280px;
+  max-width: min(95vw, 600px);
+}
+
+@media (min-width: 768px) {
+  .card-adaptive {
+    max-width: min(90vw, 700px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-adaptive {
+    max-width: min(80vw, 800px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-adaptive {
+    max-width: min(70vw, 900px);
+  }
+}
+
+/* ==== FORM ELEMENT RESPONSIVE SIZING ==== */
+.form-element-responsive {
+  @apply w-full;
+  @apply h-8 sm:h-9 md:h-10 lg:h-11;
+  @apply px-2 sm:px-3 md:px-4;
+  @apply text-xs sm:text-sm md:text-base;
+}
+
+.button-responsive {
+  @apply px-3 sm:px-4 md:px-6 lg:px-8;
+  @apply h-8 sm:h-9 md:h-10 lg:h-11;
+  @apply text-xs sm:text-sm md:text-base;
+}
+
+/* ==== LOADING OVERLAY IMPROVEMENTS ==== */
+.loading-overlay {
+  @apply fixed inset-0 z-[70] flex items-center justify-center;
+  @apply bg-bg-primary/90 backdrop-blur-sm;
+  animation: fadeIn 0.3s ease-smooth;
+}
+
+.loading-content {
+  @apply bg-bg-secondary border border-bg-tertiary rounded-lg;
+  @apply p-6 sm:p-8 md:p-10;
+  @apply flex flex-col items-center justify-center;
+  @apply min-w-[200px] max-w-[90vw] sm:max-w-[400px];
+  @apply shadow-depth-active light-glow inner-glow;
+  animation: slideUp 0.3s ease-smooth;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==== RESPONSIVE TYPOGRAPHY IMPROVEMENTS ==== */
+.text-responsive-xs {
+  @apply text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs;
+}
+
+.text-responsive-sm {
+  @apply text-[9px] sm:text-[10px] md:text-xs lg:text-sm;
+}
+
+.text-responsive-base {
+  @apply text-[10px] sm:text-xs md:text-sm lg:text-base;
+}
+
+.text-responsive-lg {
+  @apply text-xs sm:text-sm md:text-base lg:text-lg;
+}
+
+.text-responsive-xl {
+  @apply text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl;
+} 

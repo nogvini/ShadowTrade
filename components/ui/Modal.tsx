@@ -17,10 +17,10 @@ export interface ModalProps {
 }
 
 const modalSizeClasses = {
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-lg',
-  xl: 'max-w-xl',
+  sm: 'max-w-sm sm:max-w-md',
+  md: 'max-w-md sm:max-w-lg',
+  lg: 'max-w-lg sm:max-w-xl md:max-w-2xl',
+  xl: 'max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl',
   full: 'max-w-full h-full md:h-auto',
 };
 
