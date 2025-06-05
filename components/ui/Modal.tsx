@@ -71,7 +71,7 @@ const Modal: React.FC<ModalProps> = ({
       ref={modalRef}
       tabIndex={-1} // Make it focusable
       className={twMerge(
-        'fixed inset-0 z-50 flex items-center justify-center bg-bg-primary/80 backdrop-blur-sm p-4 font-press-start transition-opacity duration-300 ease-smooth',
+        'fixed inset-0 z-50 flex items-center justify-center bg-bg-primary/80 backdrop-blur-sm p-2 sm:p-4 font-press-start transition-opacity duration-300 ease-smooth',
         isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
         className
       )}
@@ -82,7 +82,7 @@ const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={twMerge(
-          'relative bg-bg-secondary text-text-primary border border-bg-tertiary shadow-2xl rounded-lg p-6 md:p-8 w-full flex flex-col max-h-[90vh]',
+          'relative bg-bg-secondary text-text-primary border border-bg-tertiary shadow-2xl rounded-lg p-3 sm:p-6 md:p-8 w-full flex flex-col max-h-[95vh] sm:max-h-[90vh]',
           modalSizeClasses[size],
           contentClassName
         )}
@@ -92,22 +92,23 @@ const Modal: React.FC<ModalProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-3 right-3 text-text-secondary hover:text-text-primary"
+            className="absolute top-2 right-2 sm:top-3 sm:right-3 text-text-secondary hover:text-text-primary z-10"
             onClick={onClose}
             aria-label="Fechar modal"
           >
-            <X size={18} />
+            <X size={16} className="sm:w-[18px] sm:h-[18px]" />
           </Button>
         )}
         {title && (
           <h2
             id="modal-title"
-            className="text-sm md:text-base font-semibold mb-4 pr-8 text-text-primary uppercase tracking-wider"
+            className="text-xs sm:text-sm md:text-base font-semibold mb-3 sm:mb-4 pr-6 sm:pr-8 text-text-primary uppercase tracking-wider shadow-text-sm"
+            data-text={title}
           >
             {title}
           </h2>
         )}
-        <div className="flex-grow overflow-y-auto pr-2 -mr-2 scrollbar-thin scrollbar-thumb-bg-tertiary scrollbar-track-bg-secondary">
+        <div className="flex-grow overflow-y-auto pr-1 sm:pr-2 -mr-1 sm:-mr-2 scrollbar-thin scrollbar-thumb-bg-tertiary scrollbar-track-bg-secondary">
           {children}
         </div>
       </div>

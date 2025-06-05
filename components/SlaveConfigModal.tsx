@@ -164,11 +164,26 @@ const SlaveConfigModal: React.FC = () => {
           </div>
         )}
 
-        <div className="flex justify-end gap-3 pt-3">
-          <Button type="button" variant="outline" onClick={closeModal} disabled={isLoading} shadowText>
+        <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 pt-3">
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={closeModal} 
+            disabled={isLoading} 
+            shadowText
+            className="w-full sm:w-auto min-w-[100px]"
+          >
             Cancelar
           </Button>
-          <Button type="submit" isLoading={isLoading} disabled={isLoading} variant="success" icon={Settings} shadowText>
+          <Button 
+            type="submit" 
+            isLoading={isLoading} 
+            disabled={isLoading} 
+            variant="success" 
+            icon={Settings} 
+            shadowText
+            className="w-full sm:w-auto min-w-[100px]"
+          >
             {slaveConfig ? 'Salvar Alterações' : 'Conectar Slave Account'}
           </Button>
         </div>

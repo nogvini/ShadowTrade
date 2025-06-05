@@ -26,10 +26,10 @@ const buttonVariants = cva(
           'bg-success text-bg-primary hover:bg-success/90',
       },
       size: {
-        default: 'h-10 px-4 py-2 text-[10px] md:text-xs',
-        sm: 'h-9 rounded-md px-3 text-[9px] md:text-[10px]',
-        lg: 'h-11 rounded-md px-8 text-xs md:text-sm',
-        icon: 'h-10 w-10',
+        default: 'h-8 sm:h-9 md:h-10 px-3 sm:px-4 py-2 text-[9px] sm:text-[10px] md:text-xs',
+        sm: 'h-7 sm:h-8 md:h-9 rounded-md px-2 sm:px-3 text-[8px] sm:text-[9px] md:text-[10px]',
+        lg: 'h-9 sm:h-10 md:h-11 rounded-md px-6 sm:px-8 text-[10px] sm:text-xs md:text-sm',
+        icon: 'h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10',
       },
     },
     defaultVariants: {
@@ -67,27 +67,38 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const Comp = asChild ? 'span' : 'button'; // Use span if asChild to pass props to child
-    const textContent = typeof children === 'string' ? children : '';
+    
+    // Extract text content for shadow effect, handling complex children
+    const extractTextContent = (children: React.ReactNode): string => {
+      if (typeof children === 'string') return children;
+      if (typeof children === 'number') return children.toString();
+      if (React.isValidElement(children) && typeof children.props.children === 'string') {
+        return children.props.children;
+      }
+      return '';
+    };
+    
+    const textContent = extractTextContent(children);
 
     return (
       <Comp
         className={twMerge(
           buttonVariants({ variant, size }), 
-          shadowText && 'shadow-text-button',
+          shadowText && textContent && 'shadow-text-button',
           className
         )}
         ref={ref}
         disabled={isLoading || disabled}
-        data-text={shadowText ? textContent : undefined}
+        data-text={shadowText && textContent ? textContent : undefined}
         {...props}
       >
-        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {isLoading && <Loader2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 animate-spin" />}
         {!isLoading && Icon && iconPosition === 'left' && (
-          <Icon className="mr-2 h-4 w-4" />
+          <Icon className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
         )}
         {children}
         {!isLoading && Icon && iconPosition === 'right' && (
-          <Icon className="ml-2 h-4 w-4" />
+          <Icon className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
         )}
       </Comp>
     );
