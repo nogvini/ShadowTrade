@@ -4,7 +4,7 @@ import React from 'react';
 import { useAppState } from '@/contexts/AppContext';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Users, CheckCircle2, Settings, AlertTriangle, Edit3 } from 'lucide-react'; // Ícone Users para Shadow, Settings para configurar
+import { Users, CheckCircle2, Settings, AlertTriangle, Edit3, Trash2 } from 'lucide-react'; // Ícone Users para Shadow, Settings para configurar
 import { twMerge } from 'tailwind-merge';
 
 const ShadowStep: React.FC = () => {
@@ -20,6 +20,10 @@ const ShadowStep: React.FC = () => {
     // A lógica de edição pode simplesmente reabrir o modal
     // Os dados atuais já estarão no modal através do AppContext
     openModal('shadow');
+  };
+
+  const handleRemove = () => {
+    // Implemente a lógica para remover o shadow
   };
 
   const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-4 sm:p-6 relative';
@@ -55,11 +59,11 @@ const ShadowStep: React.FC = () => {
           <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text={`Take Profit: ${shadowConfig.takeProfit}%`}>Take Profit: {shadowConfig.takeProfit}%</p>
         )}
         <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
+          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]">
             Editar
           </Button>
-           <Button onClick={() => resetShadowConfig()} variant="destructive" size="sm" icon={AlertTriangle} className="opacity-80 hover:opacity-100 w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
-            Desconectar
+          <Button onClick={handleRemove} variant="destructive" size="sm" icon={Trash2} className="w-full sm:w-auto text-[9px] sm:text-[10px]">
+            Remover
           </Button>
         </div>
       </Card>
@@ -91,7 +95,6 @@ const ShadowStep: React.FC = () => {
         icon={Settings}
         disabled={isLoading}
         className="group-hover:bg-text-primary group-hover:text-bg-primary transition-colors w-full sm:w-auto text-[9px] sm:text-[10px]"
-        shadowText
       >
         {isLoading ? 'Aguarde...' : 'Configurar Shadow'}
       </Button>

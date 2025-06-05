@@ -4,7 +4,7 @@ import React from 'react';
 import { useAppState } from '@/contexts/AppContext';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Link2, CheckCircle2, Settings, AlertTriangle, Edit3 } from 'lucide-react'; // Ícone Link2 para Slave
+import { Link2, CheckCircle2, Settings, AlertTriangle, Edit3, Trash2 } from 'lucide-react'; // Ícone Link2 para Slave
 import { twMerge } from 'tailwind-merge';
 
 const SlaveStep: React.FC = () => {
@@ -18,6 +18,10 @@ const SlaveStep: React.FC = () => {
 
   const handleEdit = () => {
     openModal('slave');
+  };
+
+  const handleRemove = () => {
+    // Implemente a lógica para remover o slave
   };
 
   const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-4 sm:p-6 relative';
@@ -47,11 +51,11 @@ const SlaveStep: React.FC = () => {
           Quantidade: ${slaveConfig.amount.toLocaleString()}
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
+          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]">
             Editar
           </Button>
-          <Button onClick={() => resetSlaveConfig()} variant="destructive" size="sm" icon={AlertTriangle} className="opacity-80 hover:opacity-100 w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
-            Desconectar
+          <Button onClick={handleRemove} variant="destructive" size="sm" icon={Trash2} className="w-full sm:w-auto text-[9px] sm:text-[10px]">
+            Remover
           </Button>
         </div>
       </Card>
@@ -83,7 +87,6 @@ const SlaveStep: React.FC = () => {
         icon={Settings}
         disabled={isLoading}
         className="group-hover:bg-text-primary group-hover:text-bg-primary transition-colors w-full sm:w-auto text-[9px] sm:text-[10px]"
-        shadowText
       >
         {isLoading ? 'Aguarde...' : 'Configurar Slave'}
       </Button>

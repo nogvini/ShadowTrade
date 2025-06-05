@@ -47,7 +47,6 @@ export interface ButtonProps
   asChild?: boolean;
   icon?: React.ComponentType<LucideProps>;
   iconPosition?: 'left' | 'right';
-  shadowText?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -61,24 +60,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon: Icon,
       iconPosition = 'left',
       children,
-      shadowText = false,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? 'span' : 'button'; // Use span if asChild to pass props to child
-    
-    // Extract text content for shadow effect, handling complex children
-    const extractTextContent = (children: React.ReactNode): string => {
-      if (typeof children === 'string') return children;
-      if (typeof children === 'number') return children.toString();
-      if (React.isValidElement(children) && typeof children.props.children === 'string') {
-        return children.props.children;
-      }
-      return '';
-    };
-    
-    const textContent = extractTextContent(children);
 
     // Dynamic icon sizing based on button size
     const getIconSize = () => {
@@ -95,12 +81,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={twMerge(
           buttonVariants({ variant, size }), 
-          shadowText && textContent && 'shadow-text-button',
           className
         )}
         ref={ref}
         disabled={disabled}
-        data-text={shadowText && textContent ? textContent : undefined}
         {...props}
       >
         {Icon && iconPosition === 'left' && (

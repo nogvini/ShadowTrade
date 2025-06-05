@@ -108,7 +108,7 @@ const Modal: React.FC<ModalProps> = ({
             {title}
           </h2>
         )}
-        <div className="flex-grow overflow-y-auto pr-1 sm:pr-2 -mr-1 sm:-mr-2 scrollbar-thin scrollbar-thumb-bg-tertiary scrollbar-track-bg-secondary">
+        <div className="flex-grow overflow-y-auto px-1 scrollbar-thin scrollbar-thumb-bg-tertiary scrollbar-track-bg-secondary">
           {children}
         </div>
       </div>

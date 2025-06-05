@@ -115,7 +115,6 @@ const OwnerStep: React.FC = () => {
                 size="sm" 
                 icon={Edit3} 
                 className="w-full sm:w-auto" 
-                shadowText
                 disabled={isEditing}
               >
                 {isEditing ? 'Editando...' : 'Editar API'}
@@ -126,7 +125,6 @@ const OwnerStep: React.FC = () => {
                 size="sm" 
                 icon={Trash2}
                 className="w-full sm:w-auto"
-                shadowText
                 disabled={isEditing}
               >
                 Desconectar
@@ -153,7 +151,6 @@ const OwnerStep: React.FC = () => {
                 size="sm"
                 icon={X}
                 className="text-text-secondary hover:text-text-primary"
-                shadowText
               >
                 Cancelar
               </Button>
@@ -226,7 +223,6 @@ const OwnerStep: React.FC = () => {
                   size="sm"
                   className="w-full sm:w-auto"
                   disabled={isLoading}
-                  shadowText
                 >
                   Cancelar
                 </Button>
@@ -236,7 +232,6 @@ const OwnerStep: React.FC = () => {
                   disabled={isLoading} 
                   variant="success" 
                   size="sm"
-                  shadowText
                 >
                   Salvar Alterações
                 </Button>
@@ -322,7 +317,6 @@ const OwnerStep: React.FC = () => {
           disabled={isLoading} 
           variant="success" 
           size="lg"
-          shadowText
         >
           Conectar Owner API
         </Button>
