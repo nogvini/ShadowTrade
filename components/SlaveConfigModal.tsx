@@ -165,10 +165,10 @@ const SlaveConfigModal: React.FC = () => {
         )}
 
         <div className="flex justify-end gap-3 pt-3">
-          <Button type="button" variant="outline" onClick={closeModal} disabled={isLoading}>
+          <Button type="button" variant="outline" onClick={closeModal} disabled={isLoading} shadowText>
             Cancelar
           </Button>
-          <Button type="submit" isLoading={isLoading} disabled={isLoading} variant="success" icon={Settings}>
+          <Button type="submit" isLoading={isLoading} disabled={isLoading} variant="success" icon={Settings} shadowText>
             {slaveConfig ? 'Salvar Alterações' : 'Conectar Slave Account'}
           </Button>
         </div>

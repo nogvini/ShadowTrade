@@ -46,6 +46,7 @@ export interface ButtonProps
   isLoading?: boolean;
   icon?: React.ComponentType<LucideProps>;
   iconPosition?: 'left' | 'right';
+  shadowText?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -60,17 +61,24 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon: Icon,
       iconPosition = 'left',
       children,
+      shadowText = false,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? 'span' : 'button'; // Use span if asChild to pass props to child
+    const textContent = typeof children === 'string' ? children : '';
 
     return (
       <Comp
-        className={twMerge(buttonVariants({ variant, size, className }))}
+        className={twMerge(
+          buttonVariants({ variant, size }), 
+          shadowText && 'shadow-text-button',
+          className
+        )}
         ref={ref}
         disabled={isLoading || disabled}
+        data-text={shadowText ? textContent : undefined}
         {...props}
       >
         {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

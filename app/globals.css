@@ -37,6 +37,7 @@ body {
     transition: all 0.3s ease;
   }
 
+  /* Efeito de sombra de texto - Base */
   .shadow-text {
     position: relative;
   }
@@ -44,11 +45,101 @@ body {
   .shadow-text::before {
     content: attr(data-text);
     position: absolute;
-    color: black; /* Or a very dark gray for better effect on dark BG */
-    left: 1px;    /* Adjust for desired shadow effect */
-    top: 1px;     /* Adjust for desired shadow effect */
+    color: #000000;
+    left: 1px;
+    top: 1px;
     z-index: -1;
-    opacity: 0.75; /* Optional: to make shadow less stark */
+    opacity: 0.8;
+  }
+
+  /* Efeito de sombra mais pronunciado para títulos */
+  .shadow-text-lg {
+    position: relative;
+  }
+
+  .shadow-text-lg::before {
+    content: attr(data-text);
+    position: absolute;
+    color: #000000;
+    left: 2px;
+    top: 2px;
+    z-index: -1;
+    opacity: 0.9;
+  }
+
+  /* Efeito de sombra sutil para textos pequenos */
+  .shadow-text-sm {
+    position: relative;
+  }
+
+  .shadow-text-sm::before {
+    content: attr(data-text);
+    position: absolute;
+    color: #000000;
+    left: 0.5px;
+    top: 0.5px;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  /* Efeito de sombra com desalinhamento diagonal */
+  .shadow-text-diagonal {
+    position: relative;
+  }
+
+  .shadow-text-diagonal::before {
+    content: attr(data-text);
+    position: absolute;
+    color: #000000;
+    left: 1.5px;
+    top: 1.5px;
+    z-index: -1;
+    opacity: 0.7;
+  }
+
+  /* Efeito de sombra para botões */
+  .shadow-text-button {
+    position: relative;
+  }
+
+  .shadow-text-button::before {
+    content: attr(data-text);
+    position: absolute;
+    color: #000000;
+    left: 1px;
+    top: 1px;
+    z-index: -1;
+    opacity: 0.5;
+  }
+
+  /* Efeito de sombra responsivo para títulos principais */
+  .shadow-text-title {
+    position: relative;
+  }
+
+  .shadow-text-title::before {
+    content: attr(data-text);
+    position: absolute;
+    color: #000000;
+    left: 1px;
+    top: 1px;
+    z-index: -1;
+    opacity: 0.8;
+  }
+
+  @media (min-width: 640px) {
+    .shadow-text-title::before {
+      left: 1.5px;
+      top: 1.5px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .shadow-text-title::before {
+      left: 2px;
+      top: 2px;
+      opacity: 0.9;
+    }
   }
 
   /* The glow effect for borders is now primarily handled via Tailwind's boxShadow utilities in tailwind.config.ts (e.g., shadow-glow-success) */

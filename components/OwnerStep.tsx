@@ -89,18 +89,18 @@ const OwnerStep: React.FC = () => {
       <Card className="w-full max-w-lg border-2 border-success shadow-glow-success">
         <div className="flex flex-col items-center text-center">
           <CheckCircle2 size={48} className="text-success mb-4" />
-          <h2 className="text-lg uppercase tracking-wider mb-2 text-success">Owner API Conectada!</h2>
-          <p className="text-xs text-text-secondary mb-1">API Key: {ownerConfig.maskedApiKey}</p>
-          <p className="text-xs text-text-secondary mb-6">Status: Ativa e pronta.</p>
-          <div className="flex gap-3">
-            <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3}>
+          <h2 className="text-sm sm:text-lg uppercase tracking-wider mb-2 text-success shadow-text-lg" data-text="Owner API Conectada!">Owner API Conectada!</h2>
+          <p className="text-[10px] sm:text-xs text-text-secondary mb-1 break-all px-2 shadow-text-sm" data-text={`API Key: ${ownerConfig.maskedApiKey}`}>API Key: {ownerConfig.maskedApiKey}</p>
+          <p className="text-[10px] sm:text-xs text-text-secondary mb-6 shadow-text-sm" data-text="Status: Ativa e pronta.">Status: Ativa e pronta.</p>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+            <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
               Editar API
             </Button>
             {/* <Button onClick={resetOwnerConfig} variant="destructive" size="sm" icon={Trash2}>
               Desconectar
             </Button> */}
           </div>
-          <p className="text-[10px] text-text-secondary/70 mt-4">Ao editar, você precisará reinserir todas as credenciais.</p>
+          <p className="text-[8px] sm:text-[10px] text-text-secondary/70 mt-4 px-2">Ao editar, você precisará reinserir todas as credenciais.</p>
         </div>
       </Card>
     );
@@ -108,15 +108,15 @@ const OwnerStep: React.FC = () => {
 
   return (
     <Card className="w-full max-w-lg">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="text-center mb-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <div className="text-center mb-4 sm:mb-6">
           <KeyRound size={32} className="mx-auto mb-3 text-text-primary" />
-          <h2 className="text-lg uppercase tracking-wider text-text-primary">Configurar Owner API</h2>
-          <p className="text-xs text-text-secondary mt-1">Insira as credenciais da sua conta principal (LNMarkets).</p>
+          <h2 className="text-sm sm:text-lg uppercase tracking-wider text-text-primary shadow-text-lg" data-text="Configurar Owner API">Configurar Owner API</h2>
+          <p className="text-[10px] sm:text-xs text-text-secondary mt-1 px-2 shadow-text-sm" data-text="Insira as credenciais da sua conta principal (LNMarkets).">Insira as credenciais da sua conta principal (LNMarkets).</p>
         </div>
         
         <div>
-          <label htmlFor="apiKey" className="block text-xs text-text-secondary mb-1.5 pl-1">API Key</label>
+          <label htmlFor="apiKey" className="block text-[10px] sm:text-xs text-text-secondary mb-1.5 pl-1">API Key</label>
           <Input
             id="apiKey"
             name="apiKey"
@@ -126,12 +126,13 @@ const OwnerStep: React.FC = () => {
             placeholder="Sua API Key"
             error={!!localErrors.apiKey}
             disabled={isLoading}
+            className="w-full text-[10px] sm:text-xs"
           />
-          {localErrors.apiKey && <p className="text-error text-[10px] mt-1 pl-1">{localErrors.apiKey}</p>}
+          {localErrors.apiKey && <p className="text-error text-[9px] sm:text-[10px] mt-1 pl-1 break-words">{localErrors.apiKey}</p>}
         </div>
 
         <div>
-          <label htmlFor="apiSecret" className="block text-xs text-text-secondary mb-1.5 pl-1">API Secret</label>
+          <label htmlFor="apiSecret" className="block text-[10px] sm:text-xs text-text-secondary mb-1.5 pl-1">API Secret</label>
           <Input
             id="apiSecret"
             name="apiSecret"
@@ -141,12 +142,13 @@ const OwnerStep: React.FC = () => {
             placeholder="Seu API Secret"
             error={!!localErrors.apiSecret}
             disabled={isLoading}
+            className="w-full text-[10px] sm:text-xs"
           />
-          {localErrors.apiSecret && <p className="text-error text-[10px] mt-1 pl-1">{localErrors.apiSecret}</p>}
+          {localErrors.apiSecret && <p className="text-error text-[9px] sm:text-[10px] mt-1 pl-1 break-words">{localErrors.apiSecret}</p>}
         </div>
 
         <div>
-          <label htmlFor="passphrase" className="block text-xs text-text-secondary mb-1.5 pl-1">Passphrase</label>
+          <label htmlFor="passphrase" className="block text-[10px] sm:text-xs text-text-secondary mb-1.5 pl-1">Passphrase</label>
           <Input
             id="passphrase"
             name="passphrase"
@@ -156,18 +158,19 @@ const OwnerStep: React.FC = () => {
             placeholder="Sua Passphrase (LNMarkets)"
             error={!!localErrors.passphrase}
             disabled={isLoading}
+            className="w-full text-[10px] sm:text-xs"
           />
-          {localErrors.passphrase && <p className="text-error text-[10px] mt-1 pl-1">{localErrors.passphrase}</p>}
+          {localErrors.passphrase && <p className="text-error text-[9px] sm:text-[10px] mt-1 pl-1 break-words">{localErrors.passphrase}</p>}
         </div>
 
         {localErrors.submit && (
-          <div className="flex items-center text-error text-[10px] p-2 bg-error/10 rounded-md">
-            <AlertTriangle size={14} className="mr-2 flex-shrink-0" /> 
-            {localErrors.submit}
+          <div className="flex items-start text-error text-[9px] sm:text-[10px] p-2 bg-error/10 rounded-md">
+            <AlertTriangle size={14} className="mr-2 flex-shrink-0 mt-0.5" /> 
+            <span className="break-words">{localErrors.submit}</span>
           </div>
         )}
 
-        <Button type="submit" className="w-full" isLoading={isLoading} disabled={isLoading} variant="success" size="lg">
+        <Button type="submit" className="w-full text-[10px] sm:text-xs" isLoading={isLoading} disabled={isLoading} variant="success" size="lg" shadowText>
           {isLoading ? 'Conectando API...' : 'Conectar Owner API'}
         </Button>
       </form>

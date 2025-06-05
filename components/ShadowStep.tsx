@@ -22,7 +22,7 @@ const ShadowStep: React.FC = () => {
     openModal('shadow');
   };
 
-  const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-6 relative transition-all duration-300 ease-smooth';
+  const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-4 sm:p-6 relative transition-all duration-300 ease-smooth';
   const shadowEffectClasses = 'border-l-4 border-success shadow-[-4px_0_12px_0_rgba(74,222,128,0.2),_0_4px_6px_-1px_rgba(0,0,0,0.1),_0_2px_4px_-2px_rgba(0,0,0,0.1)]'; // Sombra customizada para o efeito esquerdo e geral
 
   if (shadowConfig && shadowConfig.isConnected) {
@@ -36,28 +36,28 @@ const ShadowStep: React.FC = () => {
       >
         <CheckCircle2 size={40} className="text-success mb-3" />
         <h3 
-          className="text-lg font-semibold mb-2 text-text-primary shadow-text uppercase tracking-wider"
-          data-text="Shadow"
+          className="text-sm sm:text-lg font-semibold mb-2 text-text-primary shadow-text uppercase tracking-wider"
+          data-text="Shadow Ativa"
         >
           Shadow Ativa
         </h3>
-        <p className="text-xs text-text-secondary mb-1">
+        <p className="text-[10px] sm:text-xs text-text-secondary mb-1 break-all shadow-text-sm" data-text={`API Key: ${shadowConfig.maskedApiKey}`}>
           API Key: {shadowConfig.maskedApiKey}
         </p>
-        <p className="text-xs text-text-secondary mb-1">
+        <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text={`Quantidade: $${shadowConfig.amount.toLocaleString()}`}>
           Quantidade: ${shadowConfig.amount.toLocaleString()}
         </p>
         {shadowConfig.shadowClose && (
-          <p className="text-xs text-text-secondary mb-1">Shadow Close: Ativado</p>
+          <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text="Shadow Close: Ativado">Shadow Close: Ativado</p>
         )}
         {!shadowConfig.shadowClose && shadowConfig.takeProfit !== undefined && (
-          <p className="text-xs text-text-secondary mb-1">Take Profit: {shadowConfig.takeProfit}%</p>
+          <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text={`Take Profit: ${shadowConfig.takeProfit}%`}>Take Profit: {shadowConfig.takeProfit}%</p>
         )}
-        <div className="mt-6 flex gap-3">
-          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3}>
+        <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
             Editar
           </Button>
-           <Button onClick={() => resetShadowConfig()} variant="destructive" size="sm" icon={AlertTriangle} className="opacity-80 hover:opacity-100">
+           <Button onClick={() => resetShadowConfig()} variant="destructive" size="sm" icon={AlertTriangle} className="opacity-80 hover:opacity-100 w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
             Desconectar
           </Button>
         </div>
@@ -75,12 +75,12 @@ const ShadowStep: React.FC = () => {
     >
       <Users size={40} className="text-text-secondary group-hover:text-text-primary mb-3 transition-colors" />
       <h3 
-        className="text-lg font-semibold mb-2 text-text-secondary group-hover:text-text-primary transition-colors shadow-text uppercase tracking-wider"
-        data-text="Shadow"
+        className="text-sm sm:text-lg font-semibold mb-2 text-text-secondary group-hover:text-text-primary transition-colors shadow-text uppercase tracking-wider"
+        data-text="Shadow Account"
       >
         Shadow Account
       </h3>
-      <p className="text-xs text-text-secondary/80 mb-4 group-hover:text-text-secondary">
+      <p className="text-[10px] sm:text-xs text-text-secondary/80 mb-4 group-hover:text-text-secondary px-2 sm:px-0 shadow-text-sm" data-text="Clique para configurar sua conta Shadow.">
         Clique para configurar sua conta Shadow.
       </p>
       <Button 
@@ -88,12 +88,13 @@ const ShadowStep: React.FC = () => {
         size="sm" 
         icon={Settings}
         disabled={isLoading}
-        className="group-hover:bg-text-primary group-hover:text-bg-primary transition-colors"
+        className="group-hover:bg-text-primary group-hover:text-bg-primary transition-colors w-full sm:w-auto text-[9px] sm:text-[10px]"
+        shadowText
       >
         {isLoading ? 'Aguarde...' : 'Configurar Shadow'}
       </Button>
       {errors.shadowSubmit && (
-        <p className="text-error text-[10px] mt-3 absolute bottom-4 left-4 right-4">{errors.shadowSubmit}</p>
+        <p className="text-error text-[9px] sm:text-[10px] mt-3 absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 break-words">{errors.shadowSubmit}</p>
       )}
     </Card>
   );

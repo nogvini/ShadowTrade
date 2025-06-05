@@ -14,10 +14,10 @@ export default function HomePage() {
   const { isOwnerConfigured, currentStep } = useAppState(); // Simplificado, currentStep deve ser suficiente
 
   return (
-    <div className="flex flex-col min-h-screen items-center p-4 md:p-8 pt-[80px] md:pt-[100px]">
+    <div className="flex flex-col min-h-screen items-center p-2 sm:p-4 md:p-8 pt-[70px] sm:pt-[80px] md:pt-[100px]">
       <Header />
       <ProgressIndicator />
-      <main className="w-full max-w-4xl flex flex-col items-center gap-8 md:gap-12 mt-4 md:mt-0">
+      <main className="w-full max-w-4xl flex flex-col items-center gap-6 sm:gap-8 md:gap-12 mt-2 sm:mt-4 md:mt-0 px-2 sm:px-0">
         {/* Etapa 1: Configuração do Owner */}
         {currentStep === 1 && (
           <OwnerStep />
@@ -25,7 +25,7 @@ export default function HomePage() {
 
         {/* Etapa 2: Configuração de Shadow e Slave */}
         {currentStep === 2 && isOwnerConfigured && (
-          <div className="w-full flex flex-col md:flex-row justify-around items-stretch gap-8 md:gap-12 mt-6">
+          <div className="w-full flex flex-col lg:flex-row justify-around items-stretch gap-4 sm:gap-6 md:gap-8 lg:gap-12 mt-4 sm:mt-6">
             <ShadowStep />
             <SlaveStep />
           </div>
@@ -33,8 +33,8 @@ export default function HomePage() {
 
         {/* Fallback: Caso inicial ou estado inesperado antes do contexto carregar completamente */}
         {currentStep !== 1 && !(currentStep === 2 && isOwnerConfigured) && (
-             <div className="text-center p-10 border border-dashed border-bg-tertiary rounded-lg w-full mt-8 min-h-[200px] flex justify-center items-center">
-                <p className="text-sm text-text-secondary">
+             <div className="text-center p-6 sm:p-8 md:p-10 border border-dashed border-bg-tertiary rounded-lg w-full mt-6 sm:mt-8 min-h-[200px] flex justify-center items-center">
+                <p className="text-[10px] sm:text-sm text-text-secondary px-2">
                     Carregando interface de configuração...
                 </p>
             </div>
@@ -45,8 +45,8 @@ export default function HomePage() {
       <ShadowConfigModal />
       <SlaveConfigModal />
 
-      <footer className="w-full max-w-4xl mt-12 md:mt-16 py-4 text-center">
-        <p className="text-xs text-text-secondary/70">
+      <footer className="w-full max-w-4xl mt-8 sm:mt-12 md:mt-16 py-4 text-center px-2">
+        <p className="text-[8px] sm:text-xs text-text-secondary/70 shadow-text-sm" data-text={`Raid S&S © ${new Date().getFullYear()} - Todos os direitos reservados.`}>
           Raid S&S &copy; {new Date().getFullYear()} - Todos os direitos reservados.
         </p>
       </footer>

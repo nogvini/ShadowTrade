@@ -20,47 +20,36 @@ const SlaveStep: React.FC = () => {
     openModal('slave');
   };
 
-  const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-6 relative transition-all duration-300 ease-smooth overflow-hidden'; // overflow-hidden para a animação da corrente não sair do card
-  
-  // Efeito de borda picotada/corrente - usando repeating-linear-gradient no border-image
-  // A animação "rodeando" é mais complexa e pode precisar de SVGs ou pseudo-elementos com JS.
-  // Por ora, vamos focar na borda estática e uma animação de "chainMove" no topo.
-  const chainBorderEffect = 'border-[3px] border-transparent border-dashed'; // Estilo base para a borda
-  // A animação de corrente no topo será um elemento separado.
+  const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-4 sm:p-6 relative transition-all duration-300 ease-smooth';
+  const slaveEffectClasses = 'border-l-4 border-success shadow-[-4px_0_12px_0_rgba(74,222,128,0.2),_0_4px_6px_-1px_rgba(0,0,0,0.1),_0_2px_4px_-2px_rgba(0,0,0,0.1)]'; // Mesmo efeito do Shadow
 
   if (slaveConfig && slaveConfig.isConnected) {
     return (
       <Card 
         className={twMerge(
           cardBaseClasses,
-          chainBorderEffect,
-          'border-success',
-          'shadow-glow-success' // Adicionar efeito de glow
+          slaveEffectClasses,
+          'border-success' // Borda verde geral quando conectado
         )}
       >
-        {/* Animação de corrente decorativa no topo - placeholder */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-bg-tertiary overflow-hidden">
-          <div className="w-full h-full animate-chainMove relative">
-            {/* Simulação de elos de corrente */}
-            {[...Array(20)].map((_, i) => (
-              <span key={i} className="inline-block h-1.5 w-2 bg-text-secondary/50 rounded-full mr-1" style={{ animationDelay: `${i * 0.1}s`}}></span>
-            ))}
-          </div>
-        </div>
-
-        <CheckCircle2 size={40} className="text-success mb-3 mt-4" /> {/* mt-4 para dar espaço à animação de corrente */}
-        <h3 className="text-lg font-semibold mb-2 text-text-primary uppercase tracking-wider">Slave Ativa</h3>
-        <p className="text-xs text-text-secondary mb-1">
+        <CheckCircle2 size={40} className="text-success mb-3" />
+        <h3 
+          className="text-sm sm:text-lg font-semibold mb-2 text-text-primary shadow-text uppercase tracking-wider"
+          data-text="Slave Ativa"
+        >
+          Slave Ativa
+        </h3>
+        <p className="text-[10px] sm:text-xs text-text-secondary mb-1 break-all shadow-text-sm" data-text={`API Key: ${slaveConfig.maskedApiKey}`}>
           API Key: {slaveConfig.maskedApiKey}
         </p>
-        <p className="text-xs text-text-secondary mb-4">
+        <p className="text-[10px] sm:text-xs text-text-secondary mb-4 shadow-text-sm" data-text={`Quantidade: $${slaveConfig.amount.toLocaleString()}`}>
           Quantidade: ${slaveConfig.amount.toLocaleString()}
         </p>
-        <div className="flex gap-3">
-          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3}>
+        <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+          <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
             Editar
           </Button>
-          <Button onClick={() => resetSlaveConfig()} variant="destructive" size="sm" icon={AlertTriangle} className="opacity-80 hover:opacity-100">
+          <Button onClick={() => resetSlaveConfig()} variant="destructive" size="sm" icon={AlertTriangle} className="opacity-80 hover:opacity-100 w-full sm:w-auto text-[9px] sm:text-[10px]" shadowText>
             Desconectar
           </Button>
         </div>
@@ -72,16 +61,18 @@ const SlaveStep: React.FC = () => {
     <Card 
       className={twMerge(
         cardBaseClasses,
-        chainBorderEffect, // Borda picotada/corrente inicial
-        'border-bg-tertiary hover:border-text-primary/70 hover:shadow-xl cursor-pointer group'
+        'border-2 border-dashed border-bg-tertiary hover:border-text-primary/70 hover:shadow-xl cursor-pointer group'
       )}
       onClick={handleOpenModal}
     >
       <Link2 size={40} className="text-text-secondary group-hover:text-text-primary mb-3 transition-colors" />
-      <h3 className="text-lg font-semibold mb-2 text-text-secondary group-hover:text-text-primary transition-colors uppercase tracking-wider">
+      <h3 
+        className="text-sm sm:text-lg font-semibold mb-2 text-text-secondary group-hover:text-text-primary transition-colors shadow-text uppercase tracking-wider"
+        data-text="Slave Account"
+      >
         Slave Account
       </h3>
-      <p className="text-xs text-text-secondary/80 mb-4 group-hover:text-text-secondary">
+      <p className="text-[10px] sm:text-xs text-text-secondary/80 mb-4 group-hover:text-text-secondary px-2 sm:px-0 shadow-text-sm" data-text="Clique para configurar sua conta Slave.">
         Clique para configurar sua conta Slave.
       </p>
       <Button 
@@ -89,12 +80,13 @@ const SlaveStep: React.FC = () => {
         size="sm" 
         icon={Settings}
         disabled={isLoading}
-        className="group-hover:bg-text-primary group-hover:text-bg-primary transition-colors"
+        className="group-hover:bg-text-primary group-hover:text-bg-primary transition-colors w-full sm:w-auto text-[9px] sm:text-[10px]"
+        shadowText
       >
         {isLoading ? 'Aguarde...' : 'Configurar Slave'}
       </Button>
       {errors.slaveSubmit && (
-        <p className="text-error text-[10px] mt-3 absolute bottom-4 left-4 right-4">{errors.slaveSubmit}</p>
+        <p className="text-error text-[9px] sm:text-[10px] mt-3 absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 break-words">{errors.slaveSubmit}</p>
       )}
     </Card>
   );
