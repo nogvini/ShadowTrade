@@ -22,6 +22,9 @@ const config: Config = {
         'error': '#ef4444', // Vermelho para erro
         // Adicione outras cores conforme necessário
       },
+      transitionTimingFunction: {
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
       keyframes: {
         pulse: {
           '0%, 100%': { opacity: '1' },
