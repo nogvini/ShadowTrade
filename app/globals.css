@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #171717;
+  --bg-secondary: #2a2a2a;
+  --bg-tertiary: #404040;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --success: #4ade80;
+  --error: #ef4444;
+  --font-press-start: 'Press Start 2P', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-press-start);
+  font-size: 10px; /* Base font size for Press Start 2P, adjust as needed for visual hierarchy */
+}
+
+/* Utility classes based on systemPatterns.md and techContext.md */
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s ease;
+  }
+
+  .shadow-text {
+    position: relative;
+  }
+
+  .shadow-text::before {
+    content: attr(data-text);
+    position: absolute;
+    color: black; /* Or a very dark gray for better effect on dark BG */
+    left: 1px;    /* Adjust for desired shadow effect */
+    top: 1px;     /* Adjust for desired shadow effect */
+    z-index: -1;
+    opacity: 0.75; /* Optional: to make shadow less stark */
+  }
+
+  /* The glow effect for borders is now primarily handled via Tailwind's boxShadow utilities in tailwind.config.ts (e.g., shadow-glow-success) */
+  /* Pulse and chainMove animations are defined in tailwind.config.ts keyframes and animations */
+} 
