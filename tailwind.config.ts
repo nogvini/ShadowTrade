@@ -13,12 +13,14 @@ const config: Config = {
         'press-start': ['"Press Start 2P"', 'cursive'],
       },
       colors: {
-        'bg-primary': '#171717',
-        'bg-secondary': '#2a2a2a',
-        'bg-tertiary': '#404040',
-        'text-primary': '#ffffff',
-        'text-secondary': '#a3a3a3',
-        'success': '#4ade80', // Verde para sucesso
+        'bg-primary': '#000000',
+        'bg-secondary': '#130e13',
+        'bg-tertiary': '#271d27',
+        'bg-quaternary': '#3a2b3a',
+        'bg-quinary': '#4d3a4d',
+        'text-primary': '#b39bad',
+        'text-secondary': '#b39bad', // Usando a mesma cor para consistência
+        'success': '#decad9', // Verde para sucesso
         'error': '#ef4444', // Vermelho para erro
         // Adicione outras cores conforme necessário
       },
