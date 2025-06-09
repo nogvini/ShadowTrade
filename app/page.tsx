@@ -1,5 +1,8 @@
 'use client'; // Necessário se formos usar hooks de estado ou interações de cliente aqui diretamente
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../contexts/auth-context';
 import Header from '@/components/Header';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import OwnerStep from '@/components/OwnerStep'; // Importar OwnerStep
@@ -9,15 +12,53 @@ import ShadowConfigModal from '@/components/ShadowConfigModal'; // Importar Shad
 import SlaveConfigModal from '@/components/SlaveConfigModal'; // Importar SlaveConfigModal
 import { LoadingPopup } from '@/components/ui/LoadingPopup'; // Importar LoadingPopup
 import { useAppState } from '@/contexts/AppContext'; // Importar para checar o estado
+import { Button } from '@/components/ui/button';
+import { LogIn } from 'lucide-react';
 // Importaremos SlaveConfigModal aqui posteriormente
 
 export default function HomePage() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
   const { isOwnerConfigured, currentStep, showLoadingPopup, loadingMessage } = useAppState(); // Incluir loading popup state
+
+  // Redirecionar usuários autenticados para o dashboard
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push('/dashboard');
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  // Mostrar loading enquanto verifica autenticação
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  // Se autenticado, não mostrar nada (redirecionamento em andamento)
+  if (isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col min-h-screen items-center p-2 sm:p-4 md:p-8 pt-[70px] sm:pt-[80px] md:pt-[100px]">
       <Header />
+      
+      {/* Botão de login para usuários não autenticados */}
+      <div className="w-full max-w-4xl xl:max-w-6xl flex justify-end mb-4">
+        <Button
+          onClick={() => router.push('/auth')}
+          className="flex items-center space-x-2"
+        >
+          <LogIn className="h-4 w-4" />
+          <span>Entrar</span>
+        </Button>
+      </div>
+
       <ProgressIndicator />
+      
       <main className="w-full max-w-4xl xl:max-w-6xl flex flex-col items-center gap-6 sm:gap-8 md:gap-12 mt-2 sm:mt-4 md:mt-0 px-2 sm:px-0">
         {/* Etapa 1: Configuração do Owner */}
         {currentStep === 1 && (
@@ -53,8 +94,8 @@ export default function HomePage() {
       />
 
       <footer className="w-full max-w-4xl xl:max-w-6xl mt-8 sm:mt-12 md:mt-16 py-4 text-center px-2">
-        <p className="text-[8px] sm:text-xs text-text-secondary/70 shadow-text-sm" data-text={`Raid S&S © ${new Date().getFullYear()} - Todos os direitos reservados.`}>
-          Raid S&S &copy; {new Date().getFullYear()} - Todos os direitos reservados.
+        <p className="text-[8px] sm:text-xs text-text-secondary/70 shadow-text-sm" data-text={`ShadowTrade © ${new Date().getFullYear()} - Todos os direitos reservados.`}>
+          ShadowTrade &copy; {new Date().getFullYear()} - Todos os direitos reservados.
         </p>
       </footer>
     </div>

@@ -1,2 +1,8 @@
 node_modules/
 .next/
+.next/build-manifest.json
+.next/app-build-manifest.json
+.next/server/middleware-build-manifest.js
+.next/server/app/page_client-reference-manifest.js
+.next/static/chunks/webpack.js
+.next/static/chunks/app/layout.js
