@@ -6,3 +6,4 @@ node_modules/
 .next/server/app/page_client-reference-manifest.js
 .next/static/chunks/webpack.js
 .next/static/chunks/app/layout.js
+.next
