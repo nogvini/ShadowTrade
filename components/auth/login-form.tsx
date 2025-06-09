@@ -38,28 +38,30 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
+    <Card className="w-full max-w-md mx-auto shadow-depth light-glow" variant="depth">
+      <CardHeader className="text-center space-y-4">
+        <CardTitle>
           Entrar no ShadowTrade
         </CardTitle>
-        <CardDescription className="text-center">
+        <CardDescription>
           Acesse sua conta para gerenciar seus trades
         </CardDescription>
       </CardHeader>
       
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant="destructive" className="bg-error/10 border-error text-error">
+              <AlertDescription className="font-press-start text-xs">
+                {error}
+              </AlertDescription>
             </Alert>
           )}
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <Label htmlFor="email">Email</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-text-secondary" />
               <Input
                 id="email"
                 type="email"
@@ -73,10 +75,10 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <Label htmlFor="password">Senha</Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-text-secondary" />
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
@@ -90,7 +92,7 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-text-primary transition-colors"
                 disabled={isLoading}
               >
                 {showPassword ? (
@@ -104,27 +106,21 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
 
           <Button 
             type="submit" 
-            className="w-full" 
+            className="w-full shadow-depth" 
             disabled={isLoading}
+            size="lg"
           >
-            {isLoading ? (
-              <div className="flex items-center space-x-2">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                <span>Entrando...</span>
-              </div>
-            ) : (
-              'Entrar'
-            )}
+            {isLoading ? 'Entrando...' : 'Entrar'}
           </Button>
 
           {onSwitchToRegister && (
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
+            <div className="text-center mt-6">
+              <p className="text-xs text-text-secondary font-press-start">
                 Não tem uma conta?{' '}
                 <button
                   type="button"
                   onClick={onSwitchToRegister}
-                  className="text-blue-600 hover:text-blue-800 font-medium"
+                  className="text-success hover:text-success/80 font-press-start underline transition-colors"
                   disabled={isLoading}
                 >
                   Criar conta

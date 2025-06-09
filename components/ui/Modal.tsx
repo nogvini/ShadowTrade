@@ -1,114 +1,53 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { X } from 'lucide-react';
-import { Button } from '@/components/ui/Button'; // Assumindo que Button.tsx está em ui
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../../lib/utils';
+import { Button } from './button';
 
-export interface ModalProps {
+interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
+  title: string;
   children: React.ReactNode;
   className?: string;
-  contentClassName?: string;
-  hideCloseButton?: boolean;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
 
-const modalSizeClasses = {
-  sm: 'max-w-sm sm:max-w-md',
-  md: 'max-w-md sm:max-w-lg',
-  lg: 'max-w-lg sm:max-w-xl md:max-w-2xl',
-  xl: 'max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl',
-  full: 'max-w-full h-full md:h-auto',
-};
-
-const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  className,
-  contentClassName,
-  hideCloseButton = false,
-  size = 'md',
-}) => {
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = 'auto';
-    };
-  }, [isOpen, onClose]);
-
-  useEffect(() => {
-    if (isOpen && modalRef.current) {
-      // Focus trap logic can be added here if needed
-      // For now, just focus the modal itself for accessibility
-      modalRef.current.focus();
-    }
-  }, [isOpen]);
-
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, className }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      ref={modalRef}
-      tabIndex={-1} // Make it focusable
-      className={twMerge(
-        'fixed inset-0 z-50 flex items-center justify-center bg-bg-primary/80 backdrop-blur-sm p-2 sm:p-4 font-press-start transition-opacity duration-300 ease-smooth',
-        isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-bg-primary/90 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <div className={cn(
+        'relative bg-bg-secondary border border-bg-tertiary rounded-lg shadow-depth light-glow max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto font-press-start',
         className
-      )}
-      onClick={onClose} // Close on overlay click
-      aria-modal="true"
-      role="dialog"
-      aria-labelledby={title ? 'modal-title' : undefined}
-    >
-      <div
-        className={twMerge(
-          'relative bg-bg-secondary text-text-primary border border-bg-tertiary shadow-2xl rounded-lg p-3 sm:p-6 md:p-8 w-full flex flex-col max-h-[95vh] sm:max-h-[90vh]',
-          modalSizeClasses[size],
-          contentClassName
-        )}
-        onClick={(e) => e.stopPropagation()} // Prevent close on content click
-      >
-        {!hideCloseButton && (
+      )}>
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-bg-tertiary">
+          <h2 className="text-lg font-press-start text-text-primary shadow-text-sm uppercase tracking-wider">
+            <span className="shadow-text-sm" data-text={title}>
+              {title}
+            </span>
+          </h2>
           <Button
             variant="ghost"
-            size="icon"
-            className="absolute top-2 right-2 sm:top-3 sm:right-3 text-text-secondary hover:text-text-primary z-10"
+            size="sm"
             onClick={onClose}
-            aria-label="Fechar modal"
+            className="h-6 w-6 p-0"
           >
-            <X size={16} className="sm:w-[18px] sm:h-[18px]" />
+            <X className="h-4 w-4" />
           </Button>
-        )}
-        {title && (
-          <h2
-            id="modal-title"
-            className="text-xs sm:text-sm md:text-base font-semibold mb-3 sm:mb-4 pr-6 sm:pr-8 text-text-primary uppercase tracking-wider shadow-text-sm"
-            data-text={title}
-          >
-            {title}
-          </h2>
-        )}
-        <div className="flex-grow overflow-y-auto px-1 scrollbar-thin scrollbar-thumb-bg-tertiary scrollbar-track-bg-secondary">
+        </div>
+        
+        {/* Content */}
+        <div className="p-6">
           {children}
         </div>
       </div>
@@ -116,4 +55,4 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export { Modal }; 
+export default Modal; 

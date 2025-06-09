@@ -1,4 +1,26 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/accounts/page": "app/accounts/page.js",
+  "/api/accounts/owner/route": "app/api/accounts/owner/route.js",
+  "/api/accounts/shadow/route": "app/api/accounts/shadow/route.js",
+  "/api/accounts/slave/route": "app/api/accounts/slave/route.js",
+  "/api/associations/create/route": "app/api/associations/create/route.js",
+  "/api/associations/list/route": "app/api/associations/list/route.js",
+  "/api/associations/delete/route": "app/api/associations/delete/route.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/auth/register/route": "app/api/auth/register/route.js",
+  "/api/auto-close/logs/route": "app/api/auto-close/logs/route.js",
+  "/api/auto-close/stats/route": "app/api/auto-close/stats/route.js",
+  "/api/dashboard/performance/route": "app/api/dashboard/performance/route.js",
+  "/api/dashboard/stats/route": "app/api/dashboard/stats/route.js",
+  "/api/monitoring/status/route": "app/api/monitoring/status/route.js",
+  "/api/monitoring/stop/route": "app/api/monitoring/stop/route.js",
+  "/api/notifications/list/route": "app/api/notifications/list/route.js",
+  "/api/notifications/mark-read/route": "app/api/notifications/mark-read/route.js",
+  "/api/notifications/websocket/route": "app/api/notifications/websocket/route.js",
+  "/auth/page": "app/auth/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
   "/page": "app/page.js",
-  "/auth/page": "app/auth/page.js"
+  "/api/dashboard/trades/route": "app/api/dashboard/trades/route.js",
+  "/api/monitoring/start/route": "app/api/monitoring/start/route.js"
 }

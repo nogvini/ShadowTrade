@@ -3,7 +3,7 @@
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { Check } from 'lucide-react';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../../lib/utils';
 
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -11,16 +11,16 @@ const Checkbox = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
-    className={twMerge(
-      'peer h-4 w-4 shrink-0 rounded-sm border border-text-secondary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-success data-[state=checked]:text-bg-primary data-[state=checked]:border-success transition-all duration-200 ease-smooth',
+    className={cn(
+      'peer h-4 w-4 shrink-0 rounded-sm border border-text-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-text-primary data-[state=checked]:text-bg-primary shadow-transition',
       className
     )}
     {...props}
   >
     <CheckboxPrimitive.Indicator
-      className={twMerge('flex items-center justify-center text-current')}
+      className={cn('flex items-center justify-center text-current')}
     >
-      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+      <Check className="h-3 w-3" />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { useAppState } from '@/contexts/AppContext';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Users, CheckCircle2, Settings, AlertTriangle, Edit3, Trash2 } from 'lucide-react'; // Ícone Users para Shadow, Settings para configurar
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Users, CheckCircle2, Settings, Edit3, Trash2 } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
 const ShadowStep: React.FC = () => {
-  const { shadowConfig, openModal, isLoading, errors, resetShadowConfig } = useAppState();
+  const { shadowConfig, openModal, isLoading, errors } = useAppState();
 
   const handleOpenModal = () => {
     if (!isLoading) {
@@ -17,18 +17,12 @@ const ShadowStep: React.FC = () => {
   };
 
   const handleEdit = () => {
-    // A lógica de edição pode simplesmente reabrir o modal
-    // Os dados atuais já estarão no modal através do AppContext
     openModal('shadow');
   };
 
-  const handleRemove = () => {
-    // Implemente a lógica para remover o shadow
-  };
-
   const cardBaseClasses = 'w-full flex-1 min-h-[250px] md:min-h-[300px] flex flex-col justify-center items-center text-center p-4 sm:p-6 relative';
-  const shadowEffectClasses = 'shadow-depth-active light-glow inner-glow shadow-transition'; // Efeito ativo com luz
-  const inactiveEffectClasses = 'shadow-depth light-glow shadow-transition hover:shadow-depth-hover'; // Efeito inativo com hover
+  const shadowEffectClasses = 'shadow-depth-active light-glow inner-glow shadow-transition';
+  const inactiveEffectClasses = 'shadow-depth light-glow shadow-transition hover:shadow-depth-hover';
 
   if (shadowConfig && shadowConfig.isConnected) {
     return (
@@ -36,7 +30,7 @@ const ShadowStep: React.FC = () => {
         className={twMerge(
           cardBaseClasses,
           shadowEffectClasses,
-          'bg-bg-secondary border-success' // Fundo escuro com destaque verde
+          'bg-bg-secondary border-success'
         )}
       >
         <CheckCircle2 size={40} className="text-success mb-3" />
@@ -49,21 +43,9 @@ const ShadowStep: React.FC = () => {
         <p className="text-[10px] sm:text-xs text-text-secondary mb-1 break-all shadow-text-sm" data-text={`API Key: ${shadowConfig.maskedApiKey}`}>
           API Key: {shadowConfig.maskedApiKey}
         </p>
-        <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text={`Quantidade: $${shadowConfig.amount.toLocaleString()}`}>
-          Quantidade: ${shadowConfig.amount.toLocaleString()}
-        </p>
-        {shadowConfig.shadowClose && (
-          <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text="Shadow Close: Ativado">Shadow Close: Ativado</p>
-        )}
-        {!shadowConfig.shadowClose && shadowConfig.takeProfit !== undefined && (
-          <p className="text-[10px] sm:text-xs text-text-secondary mb-1 shadow-text-sm" data-text={`Take Profit: ${shadowConfig.takeProfit}%`}>Take Profit: {shadowConfig.takeProfit}%</p>
-        )}
         <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
           <Button onClick={handleEdit} variant="outline" size="sm" icon={Edit3} className="w-full sm:w-auto text-[9px] sm:text-[10px]">
             Editar
-          </Button>
-          <Button onClick={handleRemove} variant="destructive" size="sm" icon={Trash2} className="w-full sm:w-auto text-[9px] sm:text-[10px]">
-            Remover
           </Button>
         </div>
       </Card>
