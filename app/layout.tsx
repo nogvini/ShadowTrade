@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css'; // Importa os estilos globais
 import { AppProvider } from '@/contexts/AppContext'; // Ajuste o caminho se necessário
+import DevCleanup from '@/components/DevCleanup'; // Limpeza de atributos extras
+import '@/utils/suppressWarnings'; // Suprime warnings de desenvolvimento
 
 // Metadata para SEO e informações da página
 export const metadata: Metadata = {
@@ -21,8 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={`bg-bg-primary text-text-primary font-press-start antialiased`}>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={`bg-bg-primary text-text-primary font-press-start antialiased`} suppressHydrationWarning>
+        <DevCleanup />
         <AppProvider>
           {/* Aqui podemos adicionar Providers globais no futuro, como o ThemeProvider ou ContextProviders */}
           {children}
